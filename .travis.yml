@@ -25,7 +25,7 @@ before_install:
   - if [[ $TRAVIS_PHP_VERSION != 7.1 ]] ; then phpenv config-rm xdebug.ini; fi
   - echo "extension = memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - sudo apt-get install yaz libyaz4 libyaz4-dev
-  - sudo pecl install yaz
+  - pecl install yaz
   - echo "extension = yaz.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
 install:
