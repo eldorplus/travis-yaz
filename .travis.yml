@@ -1,0 +1,46 @@
+language: php
+
+php:
+  - 5.6
+  - 7.0
+  - 7.1
+
+env:
+  global:
+    - setup=basic
+
+matrix:
+  include:
+    - php: 5.6
+      env: setup=lowest
+    - php: 5.6
+      env: setup=stable
+    
+branches:
+  - master
+  - develop
+
+# Setting up pre-requirements
+before_install:
+  - if [[ $TRAVIS_PHP_VERSION != 7.1 ]] ; then phpenv config-rm xdebug.ini; fi
+  - echo "extension = memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  sudo: required
+  - apt-get install yaz libyaz4 libyaz4-dev
+  - pecl install yaz
+  - echo "extension = yaz.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+
+install:
+  - . $HOME/.nvm/nvm.sh
+  - nvm install stable
+  - nvm use stable
+
+script:
+  - phpunit
+  - npm test
+
+
+matrix:
+  allow_failures:
+    - php: 7.1
+    - php: hhvm
+  fast_finish: true
