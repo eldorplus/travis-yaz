@@ -35,8 +35,9 @@ install:
   - nvm use stable
 
 script:
-  - phpunit
-  - npm test
+  #- phpunit
+  - php -m | grep -i yaz
+  #- npm test
 
 matrix:
   allow_failures:
