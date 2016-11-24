@@ -27,7 +27,8 @@ before_install:
   - sudo apt-get install yaz libyaz4 libyaz4-dev
   - printf "\n" | pecl install yaz
   - echo "extension = '~/.phpenv/versions/$(phpenv version-name)/lib/php/extensions/no-debug-zts-20131226/yaz.so'" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-  - ls -lrt ~/.phpenv/versions/$(phpenv version-name)
+  - cd ~/.phpenv/versions/$(phpenv version-name)/
+  - ls -lrt .
 
 install:
   - . $HOME/.nvm/nvm.sh
